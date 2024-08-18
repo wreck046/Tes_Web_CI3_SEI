@@ -6,7 +6,7 @@ class ApiController extends CI_Controller {
 
     public function index() {
         // Data dari API
-        $api_url = 'https://api.example.com/data';
+        $api_url = 'http:localhost:8000/v1/api/proyek';
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_URL, $api_url);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
@@ -18,6 +18,6 @@ class ApiController extends CI_Controller {
         $data['db_data'] = $this->Api_model->get_data_from_db();
 
         // Load view dengan data dari API dan Database
-        $this->load->view('api_view', $data);
+        $this->load->view('Api', $data);
     }
 }

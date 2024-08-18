@@ -1,0 +1,28 @@
+<html>
+<head>
+    <title>Data dari API dan Database</title>
+</head>
+<body>
+    <h1>Data dari API</h1>
+    <?php if (!empty($api_data)): ?>
+        <ul>
+        <?php foreach ($api_data as $item): ?>
+            <li><?php echo $item['nama_proyek']; ?> - <?php echo $item['client']; ?></li>
+        <?php endforeach; ?>
+        </ul>
+    <?php else: ?>
+        <p>Tidak ada data dari API.</p>
+    <?php endif; ?>
+
+    <h1>Data dari Database</h1>
+    <?php if (!empty($db_data)): ?>
+        <ul>
+        <?php foreach ($db_data as $row): ?>
+            <li><?php echo $row['Nama Proyek']; ?> - <?php echo $row['Client']; ?></li>
+        <?php endforeach; ?>
+        </ul>
+    <?php else: ?>
+        <p>Tidak ada data dari database.</p>
+    <?php endif; ?>
+</body>
+</html>
