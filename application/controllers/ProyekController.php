@@ -11,12 +11,29 @@ class ProyekController extends CI_Controller {
     }
 
     public function index() {
-        // GET request untuk mengambil semua proyek
-        $response = $this->curl->simple_get($this->api_base_url);
-        $data['proyeks'] = json_decode($response, true);
-        $this->load->view('Proyek', $data);
-    }
+        $url = 'http://localhost:8000/v1/api/proyeks';
+        
+        // Menggunakan CURL untuk mengambil data dari API
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_URL, $url);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+        $response = curl_exec($ch);
+        curl_close($ch);
 
+        $responseData = json_decode($response, true);
+
+        if (isset($responseData['data']) && is_array($responseData['data'])) {
+            $data['proyeks'] = $responseData['data'];
+        } else {
+            $data['proyeks'] = []; // Atur ke array kosong jika tidak ada data
+        }
+    
+        // Pass data ke view
+        $this->load->view('Proyek', $data);
+
+        $data['proyeks'] = json_decode($response, true); // Pastikan variabel 'proyeks' terdefinisi
+        $this->load->view('Proyek', $data); // Pass variabel $data ke view
+    }
     // public function view($id) {
     //     // GET request untuk mengambil proyek berdasarkan ID
     //     $url = $this->api_base_url . 'http://localhost:8000/v1/api/proyeks' . $id;

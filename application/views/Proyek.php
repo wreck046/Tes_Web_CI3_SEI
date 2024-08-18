@@ -9,6 +9,14 @@
 </head>
 <body>
     <h1>Detail Proyek</h1>
+    <?php if (!empty($proyeks) && is_array($proyeks)): ?>
+    <?php foreach ($proyeks as $proyek): ?>
+        <p><?php echo htmlspecialchars($proyek['namaProyek'], ENT_QUOTES, 'UTF-8'); ?></p>
+    <?php endforeach; ?>
+<?php else: ?>
+    <p>Tidak ada data proyek tersedia.</p>
+<?php endif; ?>
+
     <?php if (isset($proyek) && is_array($proyek) && isset($proyek['data']) && is_array($proyek['data'])): ?>
         <pre><?php print_r($proyek['data']); ?></pre>
         <!-- Tampilkan data dari objek 'data' -->
